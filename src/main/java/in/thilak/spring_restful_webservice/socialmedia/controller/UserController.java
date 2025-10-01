@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import in.thilak.spring_restful_webservice.socialmedia.dao.Post;
 import in.thilak.spring_restful_webservice.socialmedia.dao.User;
 import in.thilak.spring_restful_webservice.socialmedia.service.UserService;
 import jakarta.validation.Valid;
@@ -66,5 +67,14 @@ public class UserController {
     public User deleteUserById(@PathVariable int id) {
        return userService.deleteUserById(id);
         
+    }
+    @GetMapping("/{id}/posts")
+    public List<Post> getPostsByUserId(@PathVariable int id) {
+        return userService.getPostsByUserId(id);
+    }
+
+    @PostMapping("/{id}/posts")
+    public Post createPostForUser(@PathVariable int id, @RequestBody Post post) {
+        return userService.createPostForUser(id, post);
     }
 }
